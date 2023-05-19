@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/home";
 import { Navbar } from "./components/layouts/navbar";
 import { AuthProvider } from "react-auth-kit";
+import { AuthPage } from "./pages/auth";
 
 function App() {
     const [count, setCount] = useState(0);
@@ -17,6 +18,7 @@ function App() {
                     <BrowserRouter>
                         <Routes>
                             <Route path="/" element={<HomePage />} />
+                            <Route path="/auth" element={<AuthPage />} />
                         </Routes>
                     </BrowserRouter>
                 </ChakraProvider>

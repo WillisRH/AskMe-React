@@ -23,3 +23,22 @@ export const NavMenuItem = (props) => {
         </Link>
     );
 };
+
+export const NavInvisibleMenuItem = (props) => {
+    return (
+        <Link href={props.link}>
+            <Button
+                size={{ base: "md", sm: "lg" }}
+                as={motion.div}
+                whileHover={{ scale: 1.2 }}
+                leftIcon={props.icon}
+                variant={"ghost"}
+                color="white"
+                _hover={{ bgColor: "none" }}
+                _active={{ bgColor: "none" }}
+            >
+                {props.name}
+            </Button>
+        </Link>
+    );
+};

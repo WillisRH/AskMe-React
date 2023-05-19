@@ -5,12 +5,12 @@ export const HomePage = () => {
     return (
         <>
             <section id="home">
-                <Box w={"full"} h={"5xl"} bgColor={"blackAlpha.500"}>
+                <Box w={"full"} h={"5xl"} bgColor={"gray.900"}>
                     <HomeWelcome />
                 </Box>
             </section>
             <section id="about">
-                <Box w={"full"} h={"4xl"} bgColor={"blackAlpha.500"}>
+                <Box w={"full"} h={"4xl"} bgColor={"gray.900"}>
                     <Text fontSize={"xl"}>About</Text>
                 </Box>
             </section>
