@@ -7,50 +7,64 @@ import {
     TabPanels,
     Tabs,
     Text,
+    useColorModeValue,
 } from "@chakra-ui/react";
 import { LoginPanel } from "../components/auth/login";
 import { RegisterPanel } from "../components/auth/register";
+import { useIsAuthenticated } from "react-auth-kit";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const AuthPage = () => {
+    const isAuthed = useIsAuthenticated();
+    const navigate = useNavigate();
+    const bgColor = useColorModeValue("gray.200", "gray.800");
+
     return (
         <>
-            <Flex
-                w={"full"}
-                h={"100vh"}
-                bgColor={"gray.900"}
-                justify={"center"}
-            >
-                <Box
-                    boxShadow={"0 1px 12px 0 black"}
-                    mx={5}
-                    mt={300}
-                    w={800}
-                    h={500}
-                    borderRadius={25}
-                    bgColor={"gray.800"}
+            {!isAuthed() ? (
+                <Flex
+                    w={"full"}
+                    h={"full"}
+                    bgColor={bgColor}
+                    justify={"center"}
                 >
-                    <Tabs
-                        isFitted
-                        size={"lg"}
-                        colorScheme="linkedin"
-                        variant={"soft-rounded"}
+                    <Box
+                        mx={5}
+                        mt={300}
+                        mb={144}
+                        w={800}
+                        h={600}
+                        borderRadius={25}
+                        bgColor={"gray.800"}
                     >
-                        <TabList gap={3}>
-                            <Tab textColor={"white"}>Register</Tab>
-                            <Tab textColor={"white"}>Login</Tab>
-                        </TabList>
+                        <Tabs
+                            isFitted
+                            size={"lg"}
+                            colorScheme="linkedin"
+                            variant={"soft-rounded"}
+                        >
+                            <TabList gap={3}>
+                                <Tab textColor={"white"}>Register</Tab>
+                                <Tab textColor={"white"}>Login</Tab>
+                            </TabList>
 
-                        <TabPanels>
-                            <TabPanel>
-                                <RegisterPanel />
-                            </TabPanel>
-                            <TabPanel>
-                                <LoginPanel />
-                            </TabPanel>
-                        </TabPanels>
-                    </Tabs>
-                </Box>
-            </Flex>
+                            <TabPanels>
+                                <TabPanel>
+                                    <RegisterPanel />
+                                </TabPanel>
+                                <TabPanel>
+                                    <LoginPanel />
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
+                    </Box>
+                </Flex>
+            ) : (
+                useEffect(() => {
+                    return navigate("/account/admin");
+                })
+            )}
         </>
     );
 };

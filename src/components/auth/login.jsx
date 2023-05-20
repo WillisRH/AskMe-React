@@ -9,6 +9,7 @@ import {
     FormLabel,
     Heading,
     Input,
+    Text,
 } from "@chakra-ui/react";
 import { setToast } from "../../utils/toast";
 import { useSignIn } from "react-auth-kit";
@@ -24,22 +25,19 @@ export const LoginPanel = () => {
 
     const loginSubmit = async () => {
         const res = await fetch(
-            "https://f295-111-94-109-109.ngrok-free.app/login",
+            "https://cc29-111-94-109-109.ngrok-free.app/login",
             {
-                mode: "cors",
                 method: "POST",
                 body: JSON.stringify({
                     email: formik.values.email,
                     password: formik.values.password,
                 }),
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/json",
                 },
             }
         );
-        const statuscode = res.json;
-        console.log(statuscode);
-        if (res.status == 0) {
+        if (res.status == 202) {
             makeToast(
                 "Failed to login!",
                 "Your password is incorrect. Please try again!",
@@ -56,8 +54,7 @@ export const LoginPanel = () => {
         email: yup
             .string()
             .required("Required")
-            .min(4, "Username must have atl 4 chars")
-            .max(20, "Username can only have 20 max chars"),
+            .email("Please input a valid email address"),
         password: yup
             .string()
             .required("Required")
@@ -77,17 +74,17 @@ export const LoginPanel = () => {
     return (
         <Flex>
             <Box w={"full"} h={"full"} textColor={"white"}>
-                <Heading>Log-in to your existing account.</Heading>
-                <Divider my={7} color={"gray"} />
+                <Heading my={7}>Log-in to your existing account.</Heading>
 
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl isInvalid={formik.errors.email}>
                         <FormLabel>Email</FormLabel>
                         <Input
+                            textColor={"black"}
                             type="text"
-                            variant={"flushed"}
+                            variant={"solid"}
                             p={5}
-                            placeholder="Insert your username..."
+                            placeholder="Insert your email..."
                             name="email"
                             value={formik.values.email}
                             onChange={formik.handleChange}
@@ -100,8 +97,9 @@ export const LoginPanel = () => {
                     <FormControl mt={7} isInvalid={formik.errors.password}>
                         <FormLabel>Password</FormLabel>
                         <Input
+                            textColor={"black"}
                             type="text"
-                            variant={"flushed"}
+                            variant={"solid"}
                             p={5}
                             placeholder="Insert your password..."
                             name="password"

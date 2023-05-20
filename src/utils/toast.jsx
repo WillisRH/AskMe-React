@@ -11,6 +11,7 @@ export const setToast = () => {
             isClosable: true,
             duration: 3000,
             position: "bottom",
+            variant: "subtle",
         });
     };
 

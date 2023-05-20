@@ -6,7 +6,7 @@ export default defineConfig({
     server: {
         proxy: {
             "/api": {
-                target: "http://0.tcp.ap.ngrok.io:18369",
+                target: "http://localhost:3000",
             },
         },
     },

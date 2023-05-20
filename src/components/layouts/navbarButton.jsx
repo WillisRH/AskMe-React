@@ -1,10 +1,19 @@
-import { Button, Link } from "@chakra-ui/react";
+import { Button, Link, useColorModeValue } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import {
+    btnDark,
+    btnLight,
+    textDark,
+    textLight,
+} from "../../utils/themeConfigs";
 
 // the props is
 // icon, name, link
 
 export const NavMenuItem = (props) => {
+    const bgColorBtn = useColorModeValue("white", "black");
+    const textColorBtn = useColorModeValue("black", "white");
+
     return (
         <Link href={props.link}>
             <Button
@@ -12,8 +21,8 @@ export const NavMenuItem = (props) => {
                 whileHover={{ scale: 1.2 }}
                 _hover={{ textColor: "white", bgColor: "blackAlpha.500" }}
                 transition={"all 0.3s ease-in-out"}
-                textColor={"black"}
-                bgColor={"white"}
+                textColor={textColorBtn}
+                bgColor={bgColorBtn}
                 variant={"solid"}
                 leftIcon={props.icon}
                 fontSize={20}
